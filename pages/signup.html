@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Cake කඩේ - Admin</title>
+    <link rel="stylesheet" href="/TheCakeKade/css/style_signinup.css" />
+    <script src="https://kit.fontawesome.com/1bb30c7804.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-box">
+        <h1 id="title">Sign Up</h1>
+
+        <form action="/TheCakeKade/php/signup.php" method="post" id="signup" onsubmit="return validateSignUpForm();">
+
+          <div class="input-group">
+            <div class="input-field" id="nameField">
+              <i class="fa-solid fa-user"></i>
+              <input type="text" placeholder="Name" name="name" />
+            </div>
+
+            <div class="input-field">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="email" placeholder="Email" name="email" required />
+            </div>
+
+            <div class="input-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" placeholder="Password" name="password" required />
+            </div>
+            <p>Already an Admin? <a href="/TheCakeKade/pages/signin.html">Click Here!</a></p>
+          </div>
+          <div class="btn-field">
+            <button type="submit" id="signupBtn">Sign Up</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function validateSignUpForm() {
+        var nameField = document.getElementById("nameField");
+        var nameInput = document.getElementsByName("name")[0];
+        var emailInput = document.getElementsByName("email")[0];
+        var passwordInput = document.getElementsByName("password")[0];
+
+        var isValid = true;
+
+        // Check if Name field is empty
+        if (nameInput.value.trim() === "") {
+          nameField.classList.add("input-invalid");
+          isValid = false;
+        } else {
+          nameField.classList.remove("input-invalid");
+        }
+
+        // Check if Email field is empty and is a valid email address
+        if (emailInput.value.trim() === "" || !validateEmail(emailInput.value)) {
+          emailInput.classList.add("input-invalid");
+          isValid = false;
+        } else {
+          emailInput.classList.remove("input-invalid");
+        }
+
+        // Check if Password field is empty and meets minimum length requirement
+        if (passwordInput.value.trim() === "" || passwordInput.value.length < 6) {
+          passwordInput.classList.add("input-invalid");
+          isValid = false;
+        } else {
+          passwordInput.classList.remove("input-invalid");
+        }
+
+        return isValid;
+      }
+
+      // Email validation function
+      function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+      }
+    </script>
+  </body>
+</html>
